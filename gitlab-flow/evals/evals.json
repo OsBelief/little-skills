@@ -1,0 +1,23 @@
+{
+  "skill_name": "gitlab-workflow",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "创建 GitLab 工作流：issue 标题为 fix_#594465_log_print_optimize，基于 private_v3.11 分支",
+      "expected_output": "成功创建 issue、分支和 MR，并返回它们的链接",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "准备开发新功能，创建 issue fix_#600000_add_new_feature，从 master 分支创建",
+      "expected_output": "完整的工作流创建完成，包括 issue、分支和 MR",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "一键创建 GitLab 开发工作流，issue 标题 feat_#594465_video_optimization，基础分支是 develop",
+      "expected_output": "所有资源创建成功并关联",
+      "files": []
+    }
+  ]
+}

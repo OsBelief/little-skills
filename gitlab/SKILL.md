@@ -1,6 +1,6 @@
 ---
 name: gitlab
-description: 操作 GitLab 私有化部署平台。支持查询项目、仓库文件、分支，创建/合并 MR，触发 Pipeline，以及仓库搜索（代码/提交/文件树）。使用场景包括"查询项目列表"、"搜索代码"、"获取文件内容"、"触发构建"、"创建合并请求"、"查看 Pipeline 状态"、"查找包含关键字的文件"。
+description: GitLab API 操作工具 - 查询和操作 GitLab 资源。支持搜索代码、查看文件、触发 Pipeline、查询项目、分支管理等 API 操作。使用场景包括"搜索代码"、"查找文件"、"查看 Pipeline 状态"、"触发构建"、"查询项目信息"。快速调用：/gitlab
 allowed-tools: Bash, Read, Write
 ---
 
