@@ -1,0 +1,23 @@
+{
+  "skill_name": "json-formatter",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "03-24 09:34:58.041  1187  1910 I SdkJni  : n2a f=onConfMgmtStateChanged, m={\"chairmanUri\":\"248556@SOFT\",\"commonJson\":\"{\\\"multiScreen2\\\":\\\"{\\\\\\\"noContent\\\\\\\":[{\\\\\\\"role\\\\\\\":\\\"polling\\\"}]}\",\"callIndex\":1}",
+      "expected_output": "提取日志中的 JSON 并格式化,处理 commonJson 中的嵌套 JSON 字符串",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "格式化这个 JSON: {\"name\":\"test\",\"nested\":{\"array\":[1,2,3],\"enabled\":true}}",
+      "expected_output": "直接格式化提供的 JSON 字符串",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "03-24 09:34:58.041 1187 1910 I SdkJni : data={\"user\":\"alice\",\"items\":[{\"id\":1,\"name\":\"item",
+      "expected_output": "提取并格式化 JSON,在截断位置 {\"id\":1,\"name\":\"item 处停止,不补全",
+      "files": []
+    }
+  ]
+}

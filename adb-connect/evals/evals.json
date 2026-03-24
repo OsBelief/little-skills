@@ -1,0 +1,23 @@
+{
+  "skill_name": "adb-connect-tv",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "帮我连接到 IP 为 192.168.1.100:5555 的 Android TV 设备并配置调试参数",
+      "expected_output": "Skill 应该：1) 连接到指定 IP 192.168.1.100:5555，2) 获取设备序列号，3) 根据序列号执行对应的配置命令，4) 执行 adb root 获取权限，5) 验证是否成功获取 root 权限（使用 whoami 命令），6) 显示详细的执行步骤和结果",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "我需要通过 ADB 配置电视盒子，IP 是 172.33.50.2:5353",
+      "expected_output": "Skill 应该：1) 连接到 172.33.50.2:5353，2) 获取设备型号，3) 如果是 AE1000/ME60 则设置 debug.xy=99 和端口 5656，否则设置 debug.link=998 和端口 5555，4) 执行 adb -s 172.33.50.2:5353 root，5) 使用 adb shell whoami 验证是否为 root 用户，6) 显示详细步骤和 root 权限状态",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "adb 连接电视设备进行调试配置并获取 root 权限",
+      "expected_output": "Skill 应该询问用户目标设备的 IP 地址和端口，然后执行完整的配置流程（连接 → 获取序列号 → 配置参数 → adb root → 验证权限），并显示详细步骤和 root 权限验证结果",
+      "files": []
+    }
+  ]
+}

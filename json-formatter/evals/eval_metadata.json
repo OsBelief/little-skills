@@ -1,0 +1,25 @@
+{
+  "eval_id": 1,
+  "eval_name": "log-with-nested-json",
+  "prompt": "03-24 09:34:58.041  1187  1910 I SdkJni  : n2a f=onConfMgmtStateChanged, m={\"chairmanUri\":\"248556@SOFT\",\"commonJson\":\"{\\\"multiScreen2\\\":\\\"{\\\\\\\"noContent\\\\\\\":[{\\\\\\\"role\\\\\\\":\\\"polling\\\"}]}\",\"callIndex\":1}",
+  "assertions": [
+    {
+      "name": "成功提取日志中的JSON",
+      "description": "应该从日志行中提取出 m= 后面的 JSON 内容",
+      "check_type": "contains",
+      "expected": "chairmanUri"
+    },
+    {
+      "name": "格式化外层JSON",
+      "description": "输出的 JSON 应该有正确的缩进和换行",
+      "check_type": "formatted",
+      "expected": "indented"
+    },
+    {
+      "name": "解析嵌套的commonJson字段",
+      "description": "应该识别并解析 commonJson 字段中的嵌套 JSON 字符串",
+      "check_type": "contains",
+      "expected": "multiScreen2"
+    }
+  ]
+}
