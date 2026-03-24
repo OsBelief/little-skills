@@ -62,8 +62,10 @@ def main():
         print(f"→ 调用 /adb-connect {device}")
 
         # 调用 adb-connect skill
+        skills_dir = os.path.expanduser("~/.claude/skills")
+        connect_script = os.path.join(skills_dir, "adb-connect/scripts/adb_connect.py")
         connect_success, connect_output, _ = run_command(
-            f"python /Users/colorful/.claude/skills/adb-connect/scripts/adb_connect.py {device}"
+            f"python {connect_script} {device}"
         )
 
         if not connect_success:

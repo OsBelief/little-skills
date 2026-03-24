@@ -179,8 +179,8 @@ DEPLOY_BRANCH=$2
 
 echo "🚀 开始部署: $DEPLOY_PROJECT/$DEPLOY_BRANCH"
 
-# 触发 Jenkins 构建
-~/.claude/skills/jenkins-build-trigger/scripts/trigger_build.sh \
+# 触发 Jenkins 构建（使用相对于 skill 目录的路径）
+./scripts/trigger_build.sh \
     --project "$DEPLOY_PROJECT" \
     --branch "$DEPLOY_BRANCH"
 
