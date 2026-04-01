@@ -3,6 +3,10 @@
 # GitLab Workflow 创建脚本
 # 用法: ./create_workflow.sh <issue_title> <base_branch> [issue_description]
 
+# 设置 UTF-8 编码，确保中文正确处理
+export LANG=zh_CN.UTF-8
+export LC_ALL=zh_CN.UTF-8
+
 set -e
 
 # 参数检查
@@ -110,8 +114,8 @@ ENCODED_PROJECT_PATH=$(echo -n "$PROJECT_PATH" | jq -sRr @uri)
 ISSUE_RESPONSE=$(curl -s --request POST \
   --header "PRIVATE-TOKEN: $GITLAB_ACCESS_TOKEN" \
   "https://gitlab.xylink.com/api/v4/projects/${ENCODED_PROJECT_PATH}/issues" \
-  --data "title=${ISSUE_TITLE}" \
-  --data "description=${ISSUE_DESCRIPTION}" \
+  --data-urlencode "title=${ISSUE_TITLE}" \
+  --data-urlencode "description=${ISSUE_DESCRIPTION}" \
   --data "assignee_id=${USER_ID}")
 
 ISSUE_ID=$(echo "$ISSUE_RESPONSE" | jq -r '.iid')
@@ -140,8 +144,8 @@ else
   BRANCH_RESPONSE=$(curl -s --request POST \
     --header "PRIVATE-TOKEN: $GITLAB_ACCESS_TOKEN" \
     "https://gitlab.xylink.com/api/v4/projects/${ENCODED_PROJECT_PATH}/repository/branches" \
-    --data "branch=${ISSUE_TITLE}" \
-    --data "ref=${BASE_BRANCH}")
+    --data-urlencode "branch=${ISSUE_TITLE}" \
+    --data-urlencode "ref=${BASE_BRANCH}")
 
   BRANCH_NAME=$(echo "$BRANCH_RESPONSE" | jq -r '.name')
 
@@ -209,15 +213,12 @@ ${ISSUE_DESCRIPTION}"
     MR_DESCRIPTION="Closes #${ISSUE_ID}"
   fi
 
-  # URL 编码描述（使用 jq）
-  MR_DESCRIPTION_ENCODED=$(echo -n "$MR_DESCRIPTION" | jq -sRr @uri)
-
   MR_RESPONSE=$(curl -s --request POST \
     --header "PRIVATE-TOKEN: $GITLAB_ACCESS_TOKEN" \
     "https://gitlab.xylink.com/api/v4/projects/${ENCODED_PROJECT_PATH}/merge_requests" \
-    --data "source_branch=${ISSUE_TITLE}" \
-    --data "target_branch=${BASE_BRANCH}" \
-    --data "title=${ISSUE_TITLE}" \
+    --data-urlencode "source_branch=${ISSUE_TITLE}" \
+    --data-urlencode "target_branch=${BASE_BRANCH}" \
+    --data-urlencode "title=${ISSUE_TITLE}" \
     --data-urlencode "description=${MR_DESCRIPTION}" \
     --data "assignee_id=${USER_ID}" \
     --data "remove_source_branch=false")

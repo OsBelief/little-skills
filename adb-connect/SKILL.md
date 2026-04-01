@@ -103,14 +103,14 @@ adb -s <IP>:<PORT> shell getprop ro.product.serials
 adb -s <IP>:<PORT> shell setprop debug.xy 99
 
 # 设置 TCP/IP 端口
-adb -s <IP>:<PORT> tcpip 5656
+adb -s <IP>:<PORT> tcpip 5555
 ```
 
 **输出示例：**
 ```
 ✓ 检测到设备型号: AE1000
 ✓ 已设置调试属性: debug.xy = 99
-✓ 已配置 TCP/IP 端口: 5656
+✓ 已配置 TCP/IP 端口: 5555
 ```
 
 #### 如果序列号是其他型号：
@@ -209,7 +209,7 @@ adb -s <IP>:<PORT> shell whoami
 
 [3/5] 正在配置调试参数...
   ✓ 已设置调试属性: debug.xy = 99
-  ✓ 已配置 TCP/IP 端口: 5656
+  ✓ 已配置 TCP/IP 端口: 5555
 
 [4/5] 正在获取 root 权限...
   adbd is already running as root
@@ -221,7 +221,7 @@ adb -s <IP>:<PORT> shell whoami
 ═══════════════════════════════════════
 ✓ 配置完成！
   设备型号: AE1000
-  调试端口: 5656
+  调试端口: 5555
   Root 权限: ✓ 已获取
 ═══════════════════════════════════════
 ```
@@ -269,7 +269,7 @@ adb -s <IP>:<PORT> shell whoami
 
 [3/5] 正在配置调试参数...
   ✓ 已设置调试属性: debug.xy = 99
-  ✓ 已配置 TCP/IP 端口: 5656
+  ✓ 已配置 TCP/IP 端口: 5555
 
 [4/5] 正在获取 root 权限...
   ✗ 请求 root 权限失败
@@ -282,7 +282,7 @@ adb -s <IP>:<PORT> shell whoami
 ═══════════════════════════════════════
 ⚠ 部分配置完成！
   设备型号: AE1000
-  调试端口: 5656
+  调试端口: 5555
   Root 权限: ✗ 未获取
 
 注意：调试参数已成功配置，但未获取到 root 权限。
@@ -309,8 +309,8 @@ adb -s <IP>:<PORT> shell whoami
 
 根据已知的设备信息，以下型号会使用特定配置：
 
-- **AE1000**：使用 `debug.xy` 属性，端口 5656
-- **ME60**：使用 `debug.xy` 属性，端口 5656
+- **AE1000**：使用 `debug.xy` 属性，端口 5555
+- **ME60**：使用 `debug.xy` 属性，端口 5555
 - **其他型号**：使用 `debug.link` 属性，端口 5555
 
 ## 注意事项
