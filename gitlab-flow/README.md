@@ -162,6 +162,8 @@ Claude 会自动调用此 skill 并完成所有步骤。
 
 - 使用 GitLab API v4
 - 依赖 `curl` 和 `jq` 工具
+  - `jq` 安装：`brew install jq`（macOS）或 `apt-get install jq`（Linux）
+  - 脚本启动时会自动检查 `jq` 是否可用，缺失时给出安装提示
 - 支持私有化部署的 GitLab（https://gitlab.xylink.com）
 - 自动从 git remote 推断项目路径
 

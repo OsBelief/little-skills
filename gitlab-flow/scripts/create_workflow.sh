@@ -41,8 +41,14 @@ log_step() {
   echo -e "${YELLOW}▶${NC} $1"
 }
 
+# 检查 jq 依赖
+if ! command -v jq >/dev/null 2>&1; then
+  log_error "jq 未安装，请执行: brew install jq"
+  exit 1
+fi
+
 # 检查是否在 git 仓库中
-if [ ! -d .git ]; then
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   log_error "不在 git 仓库中"
   exit 1
 fi
@@ -162,7 +168,7 @@ echo ""
 # 步骤 6: 本地创建并切换分支
 log_step "步骤 6/7: 本地创建并切换分支..."
 
-# 拉取最新代码
+# 拉取最新远程引用（包括步骤 5 通过 API 新创建的远程分支）
 git fetch origin >/dev/null 2>&1
 
 # 检查本地分支是否存在
@@ -173,21 +179,15 @@ if git rev-parse --verify "$ISSUE_TITLE" >/dev/null 2>&1; then
     exit 1
   }
 else
-  # 从远程基础分支创建新分支
-  git checkout -b "$ISSUE_TITLE" "origin/$BASE_BRANCH" 2>/dev/null || {
-    log_error "创建本地分支失败"
+  # track 远程已创建的分支（步骤 5 通过 API 创建）
+  git checkout -b "$ISSUE_TITLE" "origin/$ISSUE_TITLE" 2>/dev/null || {
+    log_error "创建本地分支失败（track 远程分支 $ISSUE_TITLE）"
     exit 1
   }
-  log_info "本地分支创建成功: $ISSUE_TITLE"
+  log_info "本地分支创建成功（tracking origin/$ISSUE_TITLE）: $ISSUE_TITLE"
 fi
 
-# 推送到远程
-git push -u origin "$ISSUE_TITLE" 2>/dev/null || {
-  log_error "推送分支到远程失败"
-  exit 1
-}
-
-log_info "分支推送到远程"
+log_info "本地分支就绪"
 echo ""
 
 # 步骤 7: 创建 Merge Request
